@@ -1,0 +1,33 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nutrition Analyzer</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .container { background: #f5f5f5; padding: 20px; border-radius: 10px; }
+        .form-group { margin-bottom: 15px; }
+        input[type="text"] { width: 300px; padding: 8px; }
+        button { padding: 8px 15px; background: #4CAF50; color: white; border: none; border-radius: 4px; }
+        .result { margin-top: 20px; padding: 15px; background: white; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nutrition Information Finder</h1>
+        <form method="POST">
+            <div class="form-group">
+                <input type="text" name="food_item" placeholder="Enter food item" required>
+                <button type="submit">Analyze</button>
+            </div>
+        </form>
+
+        {% if food_item %}
+        <div class="result">
+            <h2>Results for: {{ food_item }}</h2>
+            <pre>{{ data }}</pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

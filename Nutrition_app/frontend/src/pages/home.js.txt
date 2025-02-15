@@ -1,0 +1,31 @@
+import React, { useState } from "react";
+import axios from "axios";
+import SearchBar from "../components/SearchBar";
+import NutritionInfo from "../components/NutritionInfo";
+
+const Home = () => {
+  const [nutrition, setNutrition] = useState(null);
+  const [error, setError] = useState("");
+
+  const fetchNutrition = async (food) => {
+    setError("");
+    setNutrition(null);
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/get-nutrition", { food });
+      setNutrition(response.data.nutrition);
+    } catch (err) {
+      setError("Failed to fetch data. Try again!");
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1>Nutrition Info Finder</h1>
+      <SearchBar onSearch={fetchNutrition} />
+      {error && <p className="error">{error}</p>}
+      {nutrition && <NutritionInfo nutrition={nutrition} />}
+    </div>
+  );
+};
+
+export default Home;
